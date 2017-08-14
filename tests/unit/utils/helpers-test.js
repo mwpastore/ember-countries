@@ -18,6 +18,11 @@ test('getFormat with iso3', function(assert) {
   assert.equal(result, 'iso3');
 });
 
+test('getFormat with country-like object', function(assert) {
+  let result = getFormat({iso2: 'US'});
+  assert.equal(result, 'country');
+});
+
 test('getFormat with wrong value `Number`', function(assert) {
   let result = getFormat(1);
   assert.equal(result, null);

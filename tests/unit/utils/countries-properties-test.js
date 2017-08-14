@@ -34,6 +34,12 @@ test('Test with `fr`', function(assert) {
   assert.deepEqual(result, expect);
 });
 
+test('Test with valid country-like object', function(assert) {
+  let result = getCountry({iso2: 'US'});
+  let expect = {iso2: 'US'};
+  assert.deepEqual(result, expect);
+});
+
 test('Test with incorrect iso', function(assert) {
   let result = getCountry('AA');
   assert.equal(result, undefined);
@@ -56,6 +62,11 @@ test('Test with `undefined` input', function(assert) {
 
 test('Test with wrong isoNumeric `number` input', function(assert) {
   let result = getCountry(3);
+  assert.equal(result, undefined);
+});
+
+test('Test with invalid country-like object', function(assert) {
+  let result = getCountry({isop: 'fr'});
   assert.equal(result, undefined);
 });
 

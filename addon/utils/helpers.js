@@ -4,8 +4,11 @@ const {
   isNone
   } = Em;
 
-
 export function getFormat(val) {
+  if (typeof val === "object" && val !== null && val.iso2) {
+    return 'country';
+  }
+
   if (typeof val !== "string") {return null;}
 
   if (!isNaN(Number(val))) {

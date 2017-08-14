@@ -15,6 +15,10 @@ export function getCountry(value) {
   let valueFormat = getFormat(value);
   if (valueFormat === null) {return;}
 
+  if (valueFormat === 'country') {
+    return value;
+  }
+
   let listIndexed = _getCountriesListIndexed(valueFormat);
   let selectedCountry = listIndexed[value.toUpperCase()];
 
