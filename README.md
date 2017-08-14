@@ -76,7 +76,18 @@ export default Em.Controller.extend({
 });
 ```
 
-### Example 3: states lists
+### Example 3: countries helpers
+```hbs
+{{#if (is-country-with-state address.country)}}
+  State: {{input value=address.stateAbbrev}}
+{{/if}}
+
+{{#unless (is-country-without-zip address.country)}}
+  Postal Code: {{input value=address.zip}}
+{{/unless}}
+```
+
+### Example 4: states lists
 ```js
 import Em from 'ember';
 import emberCountries from 'ember-countries';
@@ -88,7 +99,7 @@ export default Em.Controller.extend({
 });
 ```
 
-### Example 4: states properties
+### Example 5: states properties
 ```js
 import Em from 'ember';
 import { getState, countryContainsState } from 'ember-countries';
@@ -110,6 +121,18 @@ export default Em.Controller.extend({
   ...
 });
 ```
+
+### Example 6: states helpers
+```hbs
+{{#if (country-contains-state 'ca' address.stateAbbrev)}}
+  O Canada!
+{{/if}}
+
+{{#with (get-state address.country address.stateAbbrev) as |state|}}
+  Shipping to {{state.name}}...
+{{/with}}
+```
+
 ## Running Tests
 
 * `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
