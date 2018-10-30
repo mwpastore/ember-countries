@@ -8,7 +8,7 @@ const {
   isNone
   } = Em;
 
-let indexedByIso2;
+let indexedByIso2 = {};
 
 
 export function getState(country, value) {
@@ -17,7 +17,7 @@ export function getState(country, value) {
   const STATES_LIST = getStatesForCountry(country);
   if (isNone(STATES_LIST)) {return;}
 
-  let listIndexed = _getStatesListIndexed(STATES_LIST, valueFormat);
+  let listIndexed = _getStatesListIndexed(STATES_LIST, valueFormat, country);
   let selectedState = listIndexed[value.toUpperCase()];
 
   if (!isNone(selectedState)) {
@@ -50,11 +50,11 @@ export function countryContainsState(country, state) {
 }
 
 
-function _getStatesListIndexed(LIST, code) {
+function _getStatesListIndexed(LIST, code, cacheKey) {
   let index = {};
   if (code === 'iso2') {
-    index = buildIndex(LIST, code, indexedByIso2);
-    indexedByIso2 = index;
+    index = buildIndex(LIST, code, indexedByIso2[cacheKey]);
+    indexedByIso2[cacheKey] = index;
   }
   return index;
 }
